@@ -11,12 +11,15 @@ expression = sympify(equation_text)
 f = lambdify(x, expression, "numpy")
 
 # calculate y for 50 x values from -5 to 5
-xs = np.linspace(-5, 5, 50)
+xs = np.linspace(-5, 5, 200)
 ys = f(xs)
 
 # show the points
-for i in range(len(xs)):
-    print(f"x = {xs[i]:.1f}   y = {ys[i]:.1f}")
+with open("points.csv", "w") as file:
+    for i in range(len(xs)):
+        file.write(f"{xs[i]},{ys[i]}\n")
+
+print("Saved 200 points to points.csv")
 
 # plot the curve
 plt.plot(xs, ys)
